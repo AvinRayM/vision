@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Builder</title>
+
+<style>
+body {
+    background: #0d0d0d;
+    color: white;
+    font-family: Arial;
+}
+
+.container {
+    width: 500px;
+    margin: 80px auto;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    background: #1a1a1a;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background: #4CAF50;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.chat {
+    margin-top: 20px;
+    background: #111;
+    padding: 10px;
+    border-radius: 10px;
+    height: 200px;
+    overflow-y: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>AI Script Builder</h2>
+
+    <textarea id="prompt" placeholder="e.g. make a shop system"></textarea>
+    <button onclick="sendPrompt()">Generate</button>
+
+    <div class="chat" id="chat"></div>
+</div>
+
+<script>
+const BASE_URL = "https://YOUR-RENDER-URL.onrender.com";
+
+async function sendPrompt() {
+    const prompt = document.getElementById("prompt").value;
+    const chat = document.getElementById("chat");
+
+    chat.innerHTML += `<div>> ${prompt}</div>`;
+
+    try {
+        await fetch(BASE_URL + "/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ prompt })
+        });
+
+        chat.innerHTML += `<div style="color:lightgreen;">✔ Generated</div>`;
+    } catch (err) {
+        chat.innerHTML += `<div style="color:red;">Error contacting server</div>`;
+    }
+}
+</script>
+
+</body>
+</html>
