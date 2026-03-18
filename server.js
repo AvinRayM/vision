@@ -13,7 +13,7 @@ const API_KEY = "AIzaSyB2VUFLl0Yi8AA5KgX6Hwz3aMazQNxB44g";
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash-lite",
     generationConfig: {
         responseMimeType: "application/json"
     }
