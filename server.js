@@ -26,14 +26,41 @@ app.post("/generate", async (req, res) => {
     const userPrompt = req.body.prompt;
 
     const systemPrompt = `
-You are a Roblox Lua generator.
+You are an advanced Roblox game builder AI.
 
-Return ONLY valid JSON:
+Return ONLY JSON in this format:
+
 {
-  "scriptName": "Name",
-  "source": "Lua code",
-  "location": "ServerScriptService"
+  "tasks": [
+    {
+      "type": "folder",
+      "name": "FolderName",
+      "parent": "ReplicatedStorage"
+    },
+    {
+      "type": "script",
+      "name": "ScriptName",
+      "parent": "ServerScriptService",
+      "source": "Lua code"
+    },
+    {
+      "type": "localscript",
+      "name": "ClientScript",
+      "parent": "StarterPlayerScripts",
+      "source": "Lua code"
+    },
+    {
+      "type": "remoteevent",
+      "name": "EventName",
+      "parent": "ReplicatedStorage"
+    }
+  ]
 }
+
+Rules:
+- Always include all required components
+- Make clean, working Roblox Lua
+- Do not include explanations
 
 Task: ${userPrompt}
 `;
