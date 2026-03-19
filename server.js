@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cors());
 
 // 🔑 PUT YOUR GEMINI KEY HERE
-const API_KEY = "AIzaSyCUnEyloaoN5rr36NILRug9pUNqm8brxQ4";
+const API_KEY = process.env.API_KEY;
 
 // Init Gemini
 const genAI = new GoogleGenerativeAI(API_KEY);
